@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { contentModel } from "../../client";
+import { client } from "../../client";
 import BlogContent from "./BlogContent";
 
 const Blogs = () => {
@@ -40,7 +40,7 @@ const Blogs = () => {
   // getBlogData from contentful
   const getBlogContent = useCallback(async () => {
     try {
-      const response = await contentModel.getEntries({
+      const response = await client.getEntries({
         content_type: "blogModel",
       });
       const blogContentResponse = response.items;

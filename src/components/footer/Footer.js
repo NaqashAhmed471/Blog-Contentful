@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { blogFooter } from "../../client";
+import { client } from "../../client";
 import FooterContent from "./FooterContent";
 
 const Footer = () => {
@@ -32,7 +32,7 @@ const Footer = () => {
   // getFooterData from contentful
   const getFooterContent = useCallback(async () => {
     try {
-      const response = await blogFooter.getEntries({
+      const response = await client.getEntries({
         content_type: "blogFooter",
       });
       const footerResponse = response.items;

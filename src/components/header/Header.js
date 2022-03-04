@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { blogLogo, headerLinks } from "../../client";
+import { client} from "../../client";
 import HeaderLinks from "./HeaderLinks";
 import HeaderLogo from "./HeaderLogo";
 
@@ -22,7 +22,7 @@ const Header = () => {
   // getLogo from contentful
   const getLogo = useCallback(async () => {
     try {
-      const response = await blogLogo.getEntries({ content_type: "logo" });
+      const response = await client.getEntries({ content_type: "logo" });
       const responseData = response.items;
       if (responseData) {
         cleanUpLogoData(responseData);
@@ -46,7 +46,7 @@ const Header = () => {
   // getHeaderLinks from Contentful
   const getHeaderLinks = useCallback(async () => {
     try {
-      const responseLinks = await headerLinks.getEntries({
+      const responseLinks = await client.getEntries({
         content_type: "headerLinks",
       });
       const responseLinksData = responseLinks.items;
