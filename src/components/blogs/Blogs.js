@@ -2,40 +2,55 @@ import React, { useState, useEffect, useCallback } from "react";
 import { client } from "../../client";
 import BlogContent from "./BlogContent";
 
-const Blogs = () => {
+const Blogs = ({ isFliterNewsBlog }) => {
   const [blogContent, setBlogContent] = useState([]);
 
   // cleanBlogData
-  const cleanUpBlogContentData = useCallback((blogContentRawData) => {
-    const cleanBlogContentData = blogContentRawData.map((blogContentFields) => {
-      const { sys, fields } = blogContentFields;
-      const { id } = sys;
-      const {
-        author,
-        category,
-        commints,
-        date,
-        modelLink,
-        modelTitle,
-        readMore,
-        description,
-      } = fields;
-      const blogContentImage = fields.modelImage.fields.file.url;
-      return {
-        id,
-        author,
-        category,
-        commints,
-        date,
-        modelLink,
-        modelTitle,
-        readMore,
-        description,
-        blogContentImage,
-      };
-    });
-    setBlogContent(cleanBlogContentData);
-  }, []);
+  const cleanUpBlogContentData = useCallback(
+    (blogContentRawData) => {
+      const cleanBlogContentData = blogContentRawData.map(
+        (blogContentFields) => {
+          const { sys, fields } = blogContentFields;
+          const { id } = sys;
+          const {
+            author,
+            category,
+            commints,
+            date,
+            modelLink,
+            modelTitle,
+            readMore,
+            description,
+            type,
+          } = fields;
+          const blogContentImage = fields.modelImage.fields.file.url;
+          return {
+            id,
+            author,
+            category,
+            commints,
+            date,
+            modelLink,
+            modelTitle,
+            readMore,
+            description,
+            type,
+            blogContentImage,
+          };
+        }
+      );
+
+      if (isFliterNewsBlog) {
+        const filterNewsBlog = cleanBlogContentData.filter(
+          (data) => data.type === "news"
+        );
+        setBlogContent(filterNewsBlog);
+      } else {
+        setBlogContent(cleanBlogContentData);
+      }
+    },
+    [isFliterNewsBlog]
+  );
 
   // getBlogData from contentful
   const getBlogContent = useCallback(async () => {
