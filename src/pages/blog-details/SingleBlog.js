@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 const SingleBlog = ({ blogDetail }) => {
@@ -9,6 +10,7 @@ const SingleBlog = ({ blogDetail }) => {
     date,
     modelLink,
     description,
+    type,
     blogContentImage,
   } = blogDetail;
   return (
@@ -29,7 +31,7 @@ const SingleBlog = ({ blogDetail }) => {
                     <li>{author}</li>
                     <li>
                       {category}
-                      <a href="/">{modelLink}</a>
+                      <Link to={`${modelLink}`}>{type}</Link>
                     </li>
                     <li>{commints}</li>
                   </ul>

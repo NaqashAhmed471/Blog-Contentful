@@ -21,6 +21,7 @@ const BlogDetails = () => {
       modelTitle,
       readMore,
       description,
+      type
     } = fields;
     const blogContentImage = fields.modelImage.fields.file.url;
     setBlogDetail({
@@ -33,6 +34,7 @@ const BlogDetails = () => {
       modelTitle,
       readMore,
       description,
+      type,
       blogContentImage,
     });
   }, []);
