@@ -2,7 +2,11 @@ import React, { useState, useEffect, useCallback } from "react";
 import { client } from "../../client";
 import BlogContent from "./BlogContent";
 
-const Blogs = ({ isFliterNewsBlog }) => {
+const Blogs = ({
+  isFliterNewsBlog,
+  isFliterEcommerceBlog,
+  isFliterPodcastingBlog,
+}) => {
   const [blogContent, setBlogContent] = useState([]);
 
   // cleanBlogData
@@ -45,11 +49,21 @@ const Blogs = ({ isFliterNewsBlog }) => {
           (data) => data.type === "news"
         );
         setBlogContent(filterNewsBlog);
+      } else if (isFliterEcommerceBlog) {
+        const filterEcommerceBlog = cleanBlogContentData.filter(
+          (data) => data.type === "e-commerce"
+        );
+        setBlogContent(filterEcommerceBlog);
+      } else if (isFliterPodcastingBlog) {
+        const filterPodcastingBlog = cleanBlogContentData.filter(
+          (data) => data.type === "podcasting"
+        );
+        setBlogContent(filterPodcastingBlog);
       } else {
         setBlogContent(cleanBlogContentData);
       }
     },
-    [isFliterNewsBlog]
+    [isFliterNewsBlog, isFliterEcommerceBlog, isFliterPodcastingBlog]
   );
 
   // getBlogData from contentful
@@ -84,7 +98,6 @@ const Blogs = ({ isFliterNewsBlog }) => {
           </div>
         </div>
       </section>
-      {/* <!-- Blog End --> */}
     </div>
   );
 };

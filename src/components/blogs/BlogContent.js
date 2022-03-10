@@ -13,6 +13,7 @@ const BlogContent = ({ content }) => {
     modelTitle,
     readMore,
     description,
+    type,
     blogContentImage,
   } = content;
   return (
@@ -28,7 +29,7 @@ const BlogContent = ({ content }) => {
             <li>{author}</li>
             <li>
               {category}
-              <a href="/">{modelLink}</a>
+              <Link to={modelLink}>{type}</Link>
             </li>
             <li>{commints}</li>
           </ul>
