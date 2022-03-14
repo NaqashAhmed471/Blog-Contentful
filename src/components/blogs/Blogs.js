@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { client } from "../../client";
+import SearchBox from "../search-box/SearchBox";
 import BlogContent from "./BlogContent";
 
 const Blogs = ({
@@ -8,6 +9,7 @@ const Blogs = ({
   isFliterPodcastingBlog,
 }) => {
   const [blogContent, setBlogContent] = useState([]);
+  const [searchField, setSearchField] = useState("");
 
   // cleanBlogData
   const cleanUpBlogContentData = useCallback(
@@ -87,18 +89,33 @@ const Blogs = ({
     getBlogContent();
   }, [getBlogContent]);
 
+  const handleChange = (e) => {
+    setSearchField(e.target.value);
+  };
+
+  const filteredBlog = blogContent.filter((blog) => {
+    return blog.modelTitle.toLowerCase().includes(searchField.toLowerCase());
+  });
+
   return (
-    <div className="content">
-      <section className="blogs">
-        <div className="container">
-          <div className="row">
-            {blogContent.map((content) => (
-              <BlogContent key={content.id} content={content} />
-            ))}
+    <>
+      <SearchBox
+        placeholder="search blog ...."
+        handleChange={handleChange}
+        value={searchField}
+      />
+      <div className="content">
+        <section className="blogs">
+          <div className="container">
+            <div className="row">
+              {filteredBlog.map((content) => (
+                <BlogContent key={content.id} content={content} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   );
 };
 

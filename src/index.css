@@ -198,6 +198,24 @@ header {
 }
 /*--- Banner CSS End ---*/
 
+/* ---SearchBox CSS Start --- */
+.search__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+.search__box .search__input {
+  border: none;
+  outline: none;
+  width: 150px;
+  line-height: 30px;
+  text-align: center;
+  border: 1px solid grey;
+  border-radius: 1px;
+}
+/* ---SearchBox CSS End --- */
+
 /*--- Blogs CSS Start ---*/
 .blog__col {
   margin-bottom: 60px;
